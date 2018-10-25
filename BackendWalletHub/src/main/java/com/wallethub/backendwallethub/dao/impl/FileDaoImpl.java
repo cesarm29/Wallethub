@@ -102,13 +102,13 @@ public class FileDaoImpl extends AbstractDao implements IFileDao {
 
                     if (dataObject.size() > 0) {
                         //select the ip
-                        String squeryIp = "SELECT ip FROM `load_log` GROUP BY ip  HAVING COUNT(ip) >= " + threshold + " ) ";
+                        String squeryIp = "SELECT ip FROM `load_log` GROUP BY ip  HAVING COUNT(ip) >= " + threshold + "  ";
                         SQLQuery queryIp = sesion.createSQLQuery(squeryIp);
                         ArrayList<Object[]> dataObjectIp = (ArrayList<Object[]>) queryIp.list();
                         //loop for sum rows to columns
                         for (int i = 0; i < dataObjectIp.size(); i++) {
                             //insert in log data from mysql
-                            squeryCreate = "INSERT INTO log_search  (ip, comment) values ('" + dataObjectIp.get(i).toString() + "',' has " + threshold + " or more requests between " + date + " " + hour + " and " + dateAddHour + " '  ) ";
+                            squeryCreate = "INSERT INTO log_search  (ip, comment) values ('" + dataObjectIp.get(i) + "',' has " + threshold + " or more requests between " + date + " " + hour + " and " + dateAddHour + " '  ) ";
                             //execute
                             queryCreate = session.createSQLQuery(squeryCreate);
                             //count execute update query
