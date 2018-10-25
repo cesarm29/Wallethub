@@ -1,0 +1,91 @@
+<!-- header -->
+<app-header></app-header>
+<div class="container">
+  <form [formGroup]="checkForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <h3>Search check access file into mysql</h3>
+    </div>
+    <div class="form-group row">
+      <label for="example-datetime-local-input" class="col-2 col-form-label">Date </label>
+      <div class="col-10">
+        <input class="form-control" type="date" id="date" formControlName="date" [ngClass]="{ 'is-invalid': submitted && f.date.errors }">
+        <span>
+          <div *ngIf="submitted && f.date.errors">
+            <div *ngIf="f.date.errors.required"> <label id="error">Error the date is required</label></div>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="example-datetime-local-input" class="col-2 col-form-label">Hour </label>
+      <div class="col-10">
+        <input class="form-control" type="time" step="1" id="hour" formControlName="hour" [ngClass]="{ 'is-invalid': submitted && f.hour.errors }">
+        <span>
+          <div *ngIf="submitted && f.hour.errors">
+            <div *ngIf="f.hour.errors.required"> <label id="error">Error the hour is required</label></div>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="example-datetime-local-input" class="col-2 col-form-label">Duration</label>
+      <div class="col-10">
+        <select class="form-control" id="duration" formControlName="duration" [ngClass]="{ 'is-invalid': submitted && f.duration.errors }">
+          <option>Select one option</option>
+          <option value="hourly">Hourly</option>
+          <option value="daily">Daily</option>
+        </select>
+        <span>
+          <div *ngIf="submitted && f.duration.errors">
+            <div *ngIf="f.duration.errors.required"> <label id="error">Error the duration is required</label></div>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="example-datetime-local-input" class="col-2 col-form-label">Threshold </label>
+      <div class="col-10">
+        <input class="form-control" type="number" id="threshold" formControlName="threshold" ng-maxlength="500"
+          [ngClass]="{ 'is-invalid': submitted && f.threshold.errors }">
+        <span>
+          <div *ngIf="submitted && f.threshold.errors">
+            <div *ngIf="f.threshold.errors.required"> <label id="error">Error the threshold is required</label></div>
+            <div *ngIf="f.threshold.errors.max"> <label id="error">Error the threshold max is 500</label></div>
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="text-right">
+      <button class="btn btn-success" type="submit">Search</button>
+    </div>
+  </form>
+  <br>
+  <br>
+  <h4 style="text-align:center" >List Data</h4>
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table row-border hover">
+    <thead>
+      <tr>
+        <th>Date Time</th>
+        <th>Ip</th>
+        <th>Action</th>
+        <th>State</th>
+        <th>Navigator</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listaCheck">
+        <td>{{item.dateTime}}</td>
+        <td>{{item.ip}}</td>
+        <td>{{item.action}}</td>
+        <td>{{item.state}}</td>
+        <td>{{item.navigator}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <br>
+  <br>
+</div>
+<!-- footer -->
+<app-footer></app-footer>

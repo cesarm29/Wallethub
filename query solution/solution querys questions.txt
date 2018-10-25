@@ -1,0 +1,9 @@
+
+
+(1) Write MySQL query to find IPs that mode more than a certain number of requests for a given time period.
+
+SELECT ip from `load_log` where ip in(SELECT ip FROM `load_log` GROUP BY ip HAVING COUNT(ip) > 100 ) and datetime BETWEEN '2017-01-01 00:00:01' AND '2017-01-02 00:00:01' GROUP BY ip asc
+
+(2) Write MySQL query to find requests made by a given IP.
+
+SELECT state,action,navigator from `load_log` where ip = "192.168.109.43"

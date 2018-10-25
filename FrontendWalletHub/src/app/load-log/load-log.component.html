@@ -1,0 +1,39 @@
+  <!-- header -->
+  <app-header></app-header>
+  <div class="container">
+
+      <div class="alert alert-danger alert-dismissable fuente-project" *ngIf="msg">
+          <a class="close" (click)="closeAlert()">
+             &times;
+          </a>
+        <h6>{{msg}}</h6>
+       </div>
+       <div class="alert alert-success alert-dismissable fuente-project" *ngIf="msgex">
+          <a class="close" (click)="closeAlertEx()">
+             &times;
+          </a>
+        <h6>{{msgex}}</h6>
+       </div>
+      
+    	<form  [formGroup]="loadForm"  >
+         <div class="form-group">
+         	<h3>Load log file to MySQL</h3>
+         </div>	
+    	 <div class="form-group">	
+		  <div class="custom-file">
+		    <input type="file" class="custom-file-input"  formControlName="files" accept=".log,.txt" (change)="onFileChange($event)"   [ngClass]="{ 'is-invalid': submitted && f.files.errors }"  >
+		    <label class="custom-file-label" for="files">Choose file</label>
+        <span>
+              <div *ngIf="submitted && f.files.errors" >
+                   <div *ngIf="f.files.errors.required"> <label id="error">Error the file is required only .log </label></div>
+              </div>
+        </span>
+		  </div>
+		  </div>
+    </form>
+    <div class="row justify-content-center" *ngIf="loading">
+        <div class="loader"></div>
+    </div>
+  </div>
+  <!-- footer -->
+  <app-footer></app-footer>
